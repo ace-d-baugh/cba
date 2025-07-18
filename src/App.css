@@ -1,0 +1,47 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  overflow: hidden;
+}
+
+.test {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(/src/assets/images/bg-table-sm.png); /* 1024x1024 background */
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.drawing img {
+  position: absolute;
+  width: 48.828vmin; /* 500px / 1024px = 48.828% of the limiting viewport dimension */
+  height: auto; /* Maintains aspect ratio (1200/973 ≈ 1.233, close to 500/405 ≈ 1.235) */
+  top: 40%; /* Matches your current napkin center vertical position */
+  left: 28%; /* Matches your current napkin center horizontal position */
+  transform: translate(-50%, -50%) rotate(-40deg); /* Combine centering and rotation */
+}
+
+/* Portrait orientation (taller than wide) */
+@media (max-aspect-ratio: 1/1) {
+  .drawing img {
+    width: 48.828vmin; /* Scales with viewport width (limiting dimension in portrait) */
+    /* Fine-tune position if napkin shifts due to cropping */
+    top: calc(409.6 / 1024 * 100vh); /* ≈ 40% */
+  left: calc(286.72 / 1024 * 100vw); /* ≈ 28% */
+  }
+}
+
+/* Landscape orientation (wider than tall) */
+@media (min-aspect-ratio: 1/1) {
+  .drawing img {
+    width: 48.828vmin; /* Scales with viewport height (limiting dimension in landscape) */
+    /* Fine-tune position if napkin shifts due to cropping */
+    top: calc(409.6 / 1024 * 100vh); /* ≈ 40% */
+    left: calc(286.72 / 1024 * 100vw); /* ≈ 28% */
+  }
+}
